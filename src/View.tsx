@@ -70,6 +70,13 @@ export function View({
     setSearchResults,
     theme,
   } = useContext(ReaderContext);
+
+  const [renderedOnce, setRenderedOnce] = useState(false);
+  const updateSource = () => {
+    setRenderedOnce(true);
+  };
+
+  
   const book = useRef<WebView>(null);
 
   const onMessage = (event: WebViewMessageEvent) => {
@@ -266,7 +273,7 @@ export function View({
             <TouchableWithoutFeedback onPress={handleDoublePress}>
               <WebView
                 ref={book}
-                source={{ uri: templateUri }}
+                source={  renderedOnce ? {uri: templateUri} : undefined}
                 showsVerticalScrollIndicator={false}
                 javaScriptEnabled
                 originWhitelist={['*']}
@@ -277,6 +284,7 @@ export function View({
                 allowUniversalAccessFromFileURLs
                 allowFileAccessFromFileURLs
                 allowFileAccess
+                onLoad={updateSource}
                 onShouldStartLoadWithRequest={(request) => {
                   if (
                     !isRendering &&
