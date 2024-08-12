@@ -70,12 +70,6 @@ export function View({
     setSearchResults,
     theme,
   } = useContext(ReaderContext);
-
-  const [renderedOnce, setRenderedOnce] = useState(false);
-  const updateSource = () => {
-    setRenderedOnce(true);
-  };
-
   
   const book = useRef<WebView>(null);
 
