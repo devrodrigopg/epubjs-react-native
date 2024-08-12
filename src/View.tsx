@@ -273,7 +273,7 @@ export function View({
             <TouchableWithoutFeedback onPress={handleDoublePress}>
               <WebView
                 ref={book}
-                source={  renderedOnce ? {uri: templateUri} : undefined}
+                source={{uri: templateUri}}
                 showsVerticalScrollIndicator={false}
                 javaScriptEnabled
                 originWhitelist={['*']}
@@ -284,7 +284,6 @@ export function View({
                 allowUniversalAccessFromFileURLs
                 allowFileAccessFromFileURLs
                 allowFileAccess
-                onLoad={updateSource}
                 onShouldStartLoadWithRequest={(request) => {
                   if (
                     !isRendering &&
